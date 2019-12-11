@@ -1,0 +1,14 @@
+{
+  "name": "weather-compare-data",
+  "version": "1.0.0",
+  "description": "Parse and upload data for the Weather Compare app",
+  "scripts": {
+    "upload": "node upload.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emerson Matthews",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^4.8.2"
+  }
+}
