@@ -1,6 +1,8 @@
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
 
+const OUTPUT_FILE = '../weather-compare-app/src/data/weather-data.json';
+
 const files = [
     { title: 'Average Snowfall', fileName: 'avgsnf15.csv', units: 'Inches' },
     { title: 'Hottest', fileName: 'hghtmp15.csv', units: '°F' },
@@ -21,30 +23,28 @@ const files = [
     { title: 'Average Wind', fileName: 'wndspd15.csv', units: 'MPH' },
 ];
 
-var results = {}; // map city ==> { primaryKey (state), rowKey (city), Hottest, Coldest, Max Wind, etc. }
+const parseDataPoint = (value, context) => {
+    if (context.index < 2) return value; // skip city & state columns
+    const parsedValue = parseFloat(value);
+    return isFinite(parsedValue) ? parsedValue : value;
+};
+
+const results = {};
 files.forEach(file => {
     const input = fs.readFileSync(file.fileName).toString();
     const records = parse(input, {
         ltrim: true,
         rtrim: true,
+        cast: parseDataPoint,
     });
     records.forEach(record => {
-        const cityAndState = record[0] + record[1];
-        if (!results[cityAndState]) {
-            results[cityAndState] = {
-                PartitionKey: record[0],
-                RowKey: record[1],
-            };
-        }
-        results[cityAndState][file.title] = JSON.stringify(record.slice(2));
+        const cityAndState = `${record[0]}, ${record[1]}`;
+        if (!results[cityAndState]) results[cityAndState] = {};
+        results[cityAndState][file.title] = record.slice(2);
     });
 });
-results = Object.values(results); // convert to array w/o keys
 
-// create output.json for validation purposes
-fs.writeFile ('output.json', JSON.stringify(results), err => {
+fs.writeFile (OUTPUT_FILE, JSON.stringify(results), err => {
     if (err) throw err;
-    console.log('complete');
+    console.log('Complete');
 });
-
-// TODO upload to storage acct
