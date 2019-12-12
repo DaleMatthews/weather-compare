@@ -1,24 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CityComparison from './components/CityComparison';
+import DataSelection from './components/DataSelection';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <DataSelection/>
       </header>
+      <CityComparison/>
     </div>
   );
 }
