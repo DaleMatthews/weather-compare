@@ -1,13 +1,75 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+#weatherSvg {
+  width: 100%;
+  overflow: hidden;
+}
+
+.axisX path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+.grid .domain {
+  display: none;
+}
+
+.gridX .tick line {
+  display: none;
+}
+
+.gridY {
+  stroke-dasharray: 5;
+  opacity: 0.25;
+}
+.axisY .domain {
+  display: none;
+}
+
+/*****************************************/
+._axisX path {
+  display: none;
+}
+
+._line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+._grid ._domain {
+  display: none;
+}
+
+._gridX ._tick line {
+  display: none;
+}
+
+._gridY {
+  stroke-dasharray: 5;
+  opacity: 0.25;
+}
+._axisY ._domain {
+  display: none;
+}
+
+#weatherSvg,
+#weatherSvg1 {
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
 }
