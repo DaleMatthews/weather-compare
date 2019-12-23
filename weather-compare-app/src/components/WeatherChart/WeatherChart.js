@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
+import { connect } from "react-redux";
+import { getSelectedCityData } from "../../redux/selectors";
 import "./WeatherChart.css";
 
 class WeatherChart extends Component {
@@ -173,4 +175,10 @@ class WeatherChart extends Component {
   }
 }
 
-export default WeatherChart;
+const mapStateToProps = state => {
+  const { selectedCities, selectedDataset } = state;
+  const cities = getSelectedCityData(state, selectedCities, selectedDataset);
+  return { cities, selectedDataset };
+};
+
+export default connect(mapStateToProps)(WeatherChart);

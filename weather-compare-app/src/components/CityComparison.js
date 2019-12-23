@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './CityComparison.css';
 import { getSelectedCityData } from '../redux/selectors';
 
 const CityComparison = ({ cities, selectedDataset }) => (
