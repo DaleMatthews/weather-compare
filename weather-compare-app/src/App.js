@@ -1,19 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import CityComparison from './components/CityComparison';
-import DataSelection from './components/DataSelection';
+import React, { Component } from "react";
+import WeatherChart from "./components/WeatherChart/WeatherChart";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <DataSelection/>
-      </header>
-      <CityComparison/>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return <WeatherChart />;
+  }
 }
 
 export default App;
