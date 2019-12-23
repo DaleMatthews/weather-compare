@@ -1,5 +1,15 @@
 import WeatherData from '../data/weather-data.json';
 
 export const getSelectedCityData = (store, selectedCities, selectedDataset) => {
-  return selectedCities.map(c => ({ name: c, data: WeatherData[c][selectedDataset] }));
+  return selectedCities.map(c => ({
+    id: c,
+    values: WeatherData[c][selectedDataset]
+      .slice(0, 12)
+      .map((d, idx) => {
+        return {
+          date: idx,
+          temperature: d
+        };
+      })
+  }));
 };

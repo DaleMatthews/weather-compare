@@ -5,100 +5,47 @@ import { getSelectedCityData } from "../../redux/selectors";
 import "./WeatherChart.css";
 
 class WeatherChart extends Component {
-  componentDidMount() {
-    const testData = {
-      "BIRMINGHAM, AL": {
-        "Normal Precipitation": [
-          4.84,
-          4.53,
-          5.23,
-          4.38,
-          4.99,
-          4.38,
-          4.8,
-          3.93,
-          3.9,
-          3.44,
-          4.85,
-          4.45,
-          53.72
-        ],
-        "Normal Snowfall": [0.6, 0.1, 0.6, 0.2, 0, 0, 0, 0, 0, 0, 0, 0.1, 1.6]
-      },
-      "HUNTSVILLE, AL": {
-        "Normal Precipitation": [
-          4.89,
-          4.84,
-          5.21,
-          4.32,
-          5.11,
-          4.29,
-          4.05,
-          3.61,
-          3.72,
-          3.59,
-          4.94,
-          5.77,
-          54.34
-        ],
-        "Normal Snowfall": [1.1, 0.5, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0.3, 2.4]
-      },
-      "MOBILE, AL": {
-        "Normal Precipitation": [
-          5.65,
-          5.12,
-          6.14,
-          4.79,
-          5.14,
-          6.11,
-          7.25,
-          6.96,
-          5.11,
-          3.69,
-          5.13,
-          5.06,
-          66.15
-        ],
-        "Normal Snowfall": [0, 0.1, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2]
-      }
+  updateChart = () => {
+    const svg = d3.select("#weatherSvg svg");
+    svg.selectAll("*").remove();
+
+    const cities = this.props.cities;
+    if (cities.length === 0) {
+      this.showEmpty();
+      return;
     };
 
-    const svg = d3.select("#weatherSvg svg"),
-      margin = { top: 20, right: 80, bottom: 30, left: 50 },
-      width = svg.attr("width") - margin.left - margin.right,
-      height = svg.attr("height") - margin.top - margin.bottom,
-      g = svg
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    const margin = { top: 20, right: 80, bottom: 30, left: 50 };
+    const width = svg.attr("width") - margin.left - margin.right;
+    const height = svg.attr("height") - margin.top - margin.bottom;
+    const g = svg
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    const x = d3.scaleLinear().range([0, width]),
-      y = d3.scaleLinear().range([height, 0]);
+    const x = d3.scaleLinear().range([0, width]);
+    const y = d3.scaleLinear().range([height, 0]);
 
     const line = d3
       .line()
-      .x(function(d) {
+      .x(function (d) {
         return x(d.date);
       })
-      .y(function(d) {
+      .y(function (d) {
         return y(d.temperature);
       });
 
-    const cities = Object.keys(testData).map(function(id) {
-      return {
-        id: id,
-        values: testData[id]["Normal Precipitation"]
-          .slice(0, 12)
-          .map((d, idx) => {
-            return {
-              date: idx,
-              temperature: d
-            };
-          })
-      };
+    // calculate min and max values
+    let maxTemp = cities[0].values[0].temperature;
+    let minTemp = maxTemp;
+    cities.forEach(city => {
+      city.values.forEach(value => {
+        if (value.temperature < minTemp) minTemp = value.temperature;
+        if (value.temperature > maxTemp) maxTemp = value.temperature;
+      });
     });
 
     x.domain([0, 11]).nice();
-    y.domain([0, 8]).nice();
+    y.domain([minTemp, maxTemp]).nice();
 
     function make_y_gridlines() {
       return d3.axisLeft(y).ticks(4);
@@ -131,10 +78,10 @@ class WeatherChart extends Component {
 
     city
       .append("path")
-      .attr("class", function(d) {
+      .attr("class", function (d) {
         return "line " + d.id;
       })
-      .attr("d", function(d) {
+      .attr("d", function (d) {
         return line(d.values);
       })
       .attr("stroke-width", 2)
@@ -142,10 +89,10 @@ class WeatherChart extends Component {
 
     city
       .append("text")
-      .datum(function(d) {
+      .datum(function (d) {
         return { id: d.id, value: d.values[d.values.length - 1] };
       })
-      .attr("transform", function(d) {
+      .attr("transform", function (d) {
         return (
           "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"
         );
@@ -153,11 +100,19 @@ class WeatherChart extends Component {
       .attr("x", 3)
       .attr("dy", "0.35em")
       .style("font", "10px sans-serif")
-      .text(function(d) {
+      .text(function (d) {
         return d.id;
       });
 
     svg.selectAll(".domain").remove();
+  }
+
+  showEmpty() {
+    // render empty state
+  }
+
+  componentDidUpdate() {
+    this.updateChart();
   }
 
   render() {

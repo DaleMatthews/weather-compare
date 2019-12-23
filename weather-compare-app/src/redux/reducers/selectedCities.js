@@ -1,4 +1,4 @@
-import { SET_CITY_SELECTION } from '../actionTypes';
+import { SET_CITY_SELECTION } from "../actionTypes";
 
 const selectedCities = (state = [], action) => {
   switch (action.type) {
