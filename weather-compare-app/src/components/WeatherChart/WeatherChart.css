@@ -4,6 +4,7 @@
   overflow: hidden;
   display: block;
   margin: 0 auto;
+  flex-basis: 550px;
 }
 
 .line {
