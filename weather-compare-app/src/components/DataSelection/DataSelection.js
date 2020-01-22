@@ -4,8 +4,10 @@ import WeatherData from "../../data/weather-data.json";
 import { setDatasetSelection } from "../../redux/actions";
 
 const DataSelection = ({ setDatasetSelection }) => {
-  const cities = Object.keys(WeatherData)
-  const datasets = Object.keys(WeatherData[cities[0]]).map(dataset => <option>{dataset}</option>);
+  const cities = Object.keys(WeatherData);
+  const datasets = Object.keys(WeatherData[cities[0]]).map(dataset => (
+    <option key={dataset}>{dataset}</option>
+  ));
 
   return (
     <div>
