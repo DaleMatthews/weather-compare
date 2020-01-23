@@ -1,7 +1,7 @@
 import WeatherData from "../data/weather-data.json";
 
 export const getSelectedCityData = (store, selectedCities, selectedDataset) => {
-  return selectedCities
+  return selectedCities.currentCities
     .filter(o => o)
     .map(c => {
       return {
