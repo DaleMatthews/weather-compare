@@ -1,0 +1,23 @@
+.data-selection-wrapper {
+  width: 100%;
+}
+
+.data-selection {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.dataset {
+  min-width: 100px;
+  min-height: 100px;
+  margin: 0 16px;
+  background-color: darkslateblue;
+  color: white;
+
+  border: 3px solid black;
+  border-radius: 500px;
+  text-align: center;
+}

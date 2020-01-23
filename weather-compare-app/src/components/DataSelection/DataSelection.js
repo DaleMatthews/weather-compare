@@ -2,16 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import WeatherData from "../../data/weather-data.json";
 import { setDatasetSelection } from "../../redux/actions";
+import "./DataSelection.css";
+
+const createClassName = dataset => `dataset dataset--${dataset.toLowerCase().replace(/\s/gi, '-')}`;
 
 const DataSelection = ({ setDatasetSelection }) => {
-  const cities = Object.keys(WeatherData)
-  const datasets = Object.keys(WeatherData[cities[0]]).map(dataset => <option>{dataset}</option>);
+  const cities = Object.keys(WeatherData);
 
+  const datasets = Object.keys(WeatherData[cities[0]]).map(
+    dataset => <span key={dataset} className={createClassName(dataset)}>{dataset}</span>
+  );
   return (
-    <div>
-      <select onChange={e => setDatasetSelection(e.target.value)}>
+    <div className="data-selection-wrapper">
+      <div className="data-selection">
         {datasets}
-      </select>
+      </div>
     </div>
   );
 };
