@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import CitySelection from "./components/CitySelection/CitySelection";
 import DataSelection from "./components/DataSelection/DataSelection";
+import Footer from "./components/Footer/Footer";
 import WeatherChart from "./components/WeatherChart/WeatherChart";
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
         <CitySelection/>
         <WeatherChart/>
         <DataSelection/>
+        <Footer/>
       </div>
     );
   }
