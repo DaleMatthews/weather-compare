@@ -4,14 +4,19 @@ import WeatherData from "../../data/weather-data.json";
 import { setDatasetSelection } from "../../redux/actions";
 import "./DataSelection.css";
 
-const createClassName = dataset => `dataset dataset--${dataset.toLowerCase().replace(/\s/gi, '-')}`;
 
-const DataSelection = ({ setDatasetSelection }) => {
+const DataSelection = ({ selectedDataset, setDatasetSelection }) => {
   const cities = Object.keys(WeatherData);
 
-  const datasets = Object.keys(WeatherData[cities[0]]).map(
-    dataset => <span key={dataset} className={createClassName(dataset)}>{dataset}</span>
-  );
+  const createClassName = dataset => (dataset === selectedDataset ? 'dataset dataset--selected' : 'dataset');
+
+  const datasets = Object.keys(WeatherData[cities[0]])
+    .map(dataset =>
+      <button key={dataset} className={createClassName(dataset)} onClick={() => setDatasetSelection(dataset)}>
+        {dataset}
+      </button>
+    );
+
   return (
     <div className="data-selection-wrapper">
       <div className="data-selection">
@@ -21,4 +26,6 @@ const DataSelection = ({ setDatasetSelection }) => {
   );
 };
 
-export default connect(null, { setDatasetSelection })(DataSelection);
+const mapStateToProps = ({ selectedDataset }) => ({ selectedDataset });
+
+export default connect(mapStateToProps, { setDatasetSelection })(DataSelection);

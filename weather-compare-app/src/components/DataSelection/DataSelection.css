@@ -5,19 +5,27 @@
 .data-selection {
   display: flex;
   flex-flow: row nowrap;
-  align-items: stretch;
-  justify-content: center;
-  overflow: scroll;
+  overflow-x: scroll;
+  /* firefox */
+  scrollbar-width: none; 
+}
+/* safari */
+.data-selection::-webkit-scrollbar {
+  display: none;
 }
 
 .dataset {
   min-width: 100px;
   min-height: 100px;
-  margin: 0 16px;
-  background-color: darkslateblue;
-  color: white;
-
-  border: 3px solid black;
+  margin: 0 10px;
+  background-color: lightgray;
+  border: 2px solid black;
   border-radius: 500px;
-  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.dataset--selected {
+  color: white;
+  background-color: darkslateblue;
 }

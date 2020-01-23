@@ -1,13 +1,11 @@
-import { SET_DATASET_SELECTION } from '../actionTypes';
+import { SET_DATASET_SELECTION } from "../actionTypes";
 
-const selectedDataset = (state = 'Average Snowfall', action) => {
+const selectedDataset = (state = "Average Snowfall", action) => {
   switch (action.type) {
-    case SET_DATASET_SELECTION: {
+    case SET_DATASET_SELECTION:
       return action.payload.dataset;
-    }
-    default: {
+    default:
       return state;
-    }
   }
 };
 
