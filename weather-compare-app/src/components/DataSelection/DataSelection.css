@@ -1,0 +1,31 @@
+.data-selection-wrapper {
+  width: 100%;
+}
+
+.data-selection {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  /* firefox */
+  scrollbar-width: none; 
+}
+/* safari */
+.data-selection::-webkit-scrollbar {
+  display: none;
+}
+
+.dataset {
+  min-width: 100px;
+  min-height: 100px;
+  margin: 0 10px;
+  background-color: lightgray;
+  border: 2px solid black;
+  border-radius: 500px;
+  color: black;
+  font-weight: bold;
+}
+
+.dataset--selected {
+  color: white;
+  background-color: darkslateblue;
+}
