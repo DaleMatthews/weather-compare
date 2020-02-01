@@ -9,7 +9,7 @@ class DisplayCities extends Component {
 
   render() {
     const displayItmes = ["Add City", "Add City", "Add City", "Add City"];
-    this.props.cities.currentCities.forEach((city, i) => {
+    this.props.cities.forEach((city, i) => {
       displayItmes[i] = city;
     });
     return displayItmes.map((item, i) => {

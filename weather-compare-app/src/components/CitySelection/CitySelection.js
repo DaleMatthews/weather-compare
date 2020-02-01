@@ -5,12 +5,6 @@ import { addCitySelection, setCitySelection } from "../../redux/actions";
 import { getSelectedCityData } from "../../redux/selectors";
 
 class CitySelection extends Component {
-  componentDidMount() {
-    this.props.setCitySelection(
-      this.props.currentCities.filter(o => o).map(o => o.id)
-    );
-  }
-
   handleSelect(e) {
     this.props.addCitySelection(
       [...e.target.options].filter(o => o.selected).map(o => o.value)
