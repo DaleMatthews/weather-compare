@@ -7,7 +7,7 @@ import {
 
 export const setCitySelection = cities => ({
   type: SET_CITY_SELECTION,
-  payload: cities
+  payload: { cities }
 });
 export const addCitySelection = cities => ({
   type: ADD_CITY_SELECTION,

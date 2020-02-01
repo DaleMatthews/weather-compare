@@ -6,7 +6,7 @@ import { getSelectedCityData } from "../../redux/selectors";
 
 class CitySelection extends Component {
   handleSelect(e) {
-    this.props.addCitySelection(
+    this.props.setCitySelection(
       [...e.target.options].filter(o => o.selected).map(o => o.value)
     );
   }
