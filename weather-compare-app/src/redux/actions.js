@@ -9,13 +9,13 @@ export const setCitySelection = cities => ({
   type: SET_CITY_SELECTION,
   payload: { cities }
 });
-export const addCitySelection = cities => ({
+export const addCitySelection = city => ({
   type: ADD_CITY_SELECTION,
-  payload: { cities }
+  payload: { city }
 });
 export const removeCitySelection = index => ({
   type: REMOVE_CITY_SELECTION,
-  payload: index
+  payload: { index }
 });
 export const setDatasetSelection = dataset => ({
   type: SET_DATASET_SELECTION,

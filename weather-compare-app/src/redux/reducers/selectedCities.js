@@ -12,7 +12,7 @@ const selectedCities = (state = initialState, action) => {
       return action.payload.cities;
     }
     case REMOVE_CITY_SELECTION: {
-      return state.filter((city, index) => index !== action.payload);
+      return state.filter((city, index) => index !== action.payload.index);
     }
     case ADD_CITY_SELECTION: {
       return state.concat([action.payload.city]);
