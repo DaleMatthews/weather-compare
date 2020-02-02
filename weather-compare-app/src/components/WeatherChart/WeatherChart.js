@@ -78,12 +78,8 @@ class WeatherChart extends Component {
 
     city
       .append("path")
-      .attr("class", function(d) {
-        return "line " + d.id;
-      })
-      .attr("d", function(d) {
-        return line(d.values);
-      })
+      .attr("class", (d, index) => `line line--${index}`)
+      .attr("d", d => line(d.values))
       .attr("stroke-width", 2)
       .attr("stroke", "black");
 

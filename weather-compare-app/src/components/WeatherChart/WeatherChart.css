@@ -12,6 +12,22 @@
   stroke-width: 1.5px;
 }
 
+.line--0 {
+  stroke: #2a2a2a;
+}
+
+.line--1 {
+  stroke: #2574a9;
+}
+
+.line--2 {
+  stroke: #ff4500;
+}
+
+.line--3 {
+  stroke: #58007e;
+}
+
 .gridY {
   stroke-dasharray: 5;
   opacity: 0.25;
