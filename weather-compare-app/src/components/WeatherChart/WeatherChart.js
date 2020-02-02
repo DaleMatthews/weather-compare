@@ -13,7 +13,7 @@ class WeatherChart extends Component {
     if (cities.length === 0) {
       this.showEmpty();
       return;
-    };
+    }
 
     const margin = { top: 20, right: 80, bottom: 30, left: 50 };
     const width = svg.attr("width") - margin.left - margin.right;
@@ -27,10 +27,10 @@ class WeatherChart extends Component {
 
     const line = d3
       .line()
-      .x(function (d) {
+      .x(function(d) {
         return x(d.date);
       })
-      .y(function (d) {
+      .y(function(d) {
         return y(d.temperature);
       });
 
@@ -78,10 +78,10 @@ class WeatherChart extends Component {
 
     city
       .append("path")
-      .attr("class", function (d) {
+      .attr("class", function(d) {
         return "line " + d.id;
       })
-      .attr("d", function (d) {
+      .attr("d", function(d) {
         return line(d.values);
       })
       .attr("stroke-width", 2)
@@ -89,10 +89,10 @@ class WeatherChart extends Component {
 
     city
       .append("text")
-      .datum(function (d) {
+      .datum(function(d) {
         return { id: d.id, value: d.values[d.values.length - 1] };
       })
-      .attr("transform", function (d) {
+      .attr("transform", function(d) {
         return (
           "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"
         );
@@ -100,15 +100,19 @@ class WeatherChart extends Component {
       .attr("x", 3)
       .attr("dy", "0.35em")
       .style("font", "10px sans-serif")
-      .text(function (d) {
+      .text(function(d) {
         return d.id;
       });
 
     svg.selectAll(".domain").remove();
-  }
+  };
 
   showEmpty() {
     // render empty state
+  }
+
+  componentDidMount() {
+    this.updateChart();
   }
 
   componentDidUpdate() {

@@ -1,19 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import WeatherData from "../../data/weather-data.json";
-import { setCitySelection } from "../../redux/actions";
+import { addCitySelection, setCitySelection } from "../../redux/actions";
+import { getSelectedCityData } from "../../redux/selectors";
 
-const CitySelection = ({ setCitySelection }) => {
-  const cities = Object.keys(WeatherData)
-  const cityOptions = cities.map(city => <option>{city}</option>);
+class CitySelection extends Component {
+  handleSelect(e) {
+    this.props.setCitySelection(
+      [...e.target.options].filter(o => o.selected).map(o => o.value)
+    );
+  }
 
-  return (
-    <div>
-      <select multiple onChange={e => setCitySelection([...e.target.options].filter(o => o.selected).map(o => o.value))}>
-      {cityOptions}
-      </select>
-    </div>
+  render() {
+    const cities = Object.keys(WeatherData);
+    const cityOptions = cities
+      .filter(o => !this.props.currentCities.some(city => city.id === o))
+      .map(city => <option key={city}>{city}</option>);
+    return (
+      <div>
+        <select multiple onChange={e => this.handleSelect(e)}>
+          {cityOptions}
+        </select>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { selectedCities, selectedDataset } = state;
+  const currentCities = getSelectedCityData(
+    state,
+    selectedCities,
+    selectedDataset
   );
+  return { currentCities };
 };
 
-export default connect(null, { setCitySelection })(CitySelection);
+const mapDispatchToProps = {
+  addCitySelection,
+  setCitySelection
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CitySelection);
