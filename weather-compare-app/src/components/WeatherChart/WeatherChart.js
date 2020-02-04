@@ -48,7 +48,7 @@ class WeatherChart extends Component {
     y.domain([minTemp, maxTemp]).nice();
 
     function make_y_gridlines() {
-      return d3.axisLeft(y).ticks(4);
+      return d3.axisLeft(y).ticks(8);
     }
 
     svg
@@ -68,7 +68,7 @@ class WeatherChart extends Component {
 
     g.append("g")
       .attr("class", "axis axisY")
-      .call(d3.axisLeft(y).ticks(4));
+      .call(d3.axisLeft(y).ticks(8));
     var city = g
       .selectAll(".city")
       .data(cities)
@@ -80,8 +80,6 @@ class WeatherChart extends Component {
       .append("path")
       .attr("class", (d, index) => `line line--${index}`)
       .attr("d", d => line(d.values))
-      .attr("stroke-width", 2)
-      .attr("stroke", "black");
 
     city
       .append("text")
@@ -120,7 +118,7 @@ class WeatherChart extends Component {
       <svg
         id="weatherSvg"
         viewBox="0 0 500 500"
-        preserveAspectRatio="xMinYMin slice"
+        preserveAspectRatio="xMidYMid meet"
         width="100%"
         height="100%"
       >

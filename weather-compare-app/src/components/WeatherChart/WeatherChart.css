@@ -1,7 +1,6 @@
 #weatherSvg {
   width: 100%;
   max-width: 500px;
-  overflow: hidden;
   display: block;
   margin: 0 auto;
   flex-basis: 550px;
