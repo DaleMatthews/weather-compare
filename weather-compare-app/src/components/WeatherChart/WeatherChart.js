@@ -9,11 +9,12 @@ class WeatherChart extends Component {
     const svg = d3.select("#weatherSvg svg");
     svg.selectAll("*").remove();
 
-    const cities = this.props.cities;
+    let cities = this.props.cities;
     if (cities.length === 0) {
       this.showEmpty();
       return;
     }
+    cities = cities.slice(0, 4);
 
     const margin = { top: 20, right: 80, bottom: 30, left: 50 };
     const width = svg.attr("width") - margin.left - margin.right;
@@ -93,7 +94,7 @@ class WeatherChart extends Component {
       })
       .attr("x", 3)
       .attr("dy", "0.35em")
-      .style("font", "10px sans-serif")
+      .style("font", "8px sans-serif")
       .text(function(d) {
         return d.id;
       });
