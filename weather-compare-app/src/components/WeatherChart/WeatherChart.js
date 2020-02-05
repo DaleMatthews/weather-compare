@@ -28,12 +28,8 @@ class WeatherChart extends Component {
 
     const line = d3
       .line()
-      .x(function(d) {
-        return x(d.date);
-      })
-      .y(function(d) {
-        return y(d.temperature);
-      });
+      .x(d => x(d.date))
+      .y(d => y(d.temperature));
 
     // calculate min and max values
     let maxTemp = cities[0].values[0].temperature;
@@ -49,8 +45,13 @@ class WeatherChart extends Component {
     y.domain([minTemp, maxTemp]).nice();
 
     function make_y_gridlines() {
-      return d3.axisLeft(y).ticks(8);
+      return d3.axisLeft(y).ticks(6);
     }
+
+    // create color mapper
+    const color = d3.scaleOrdinal()
+      .domain([0, 1, 2, 3])
+      .range(d3.schemeDark2)
 
     svg
       .append("g")
@@ -69,7 +70,7 @@ class WeatherChart extends Component {
 
     g.append("g")
       .attr("class", "axis axisY")
-      .call(d3.axisLeft(y).ticks(8));
+      .call(d3.axisLeft(y).ticks(6));
     var city = g
       .selectAll(".city")
       .data(cities)
@@ -79,25 +80,18 @@ class WeatherChart extends Component {
 
     city
       .append("path")
-      .attr("class", (d, index) => `line line--${index}`)
+      .attr("class", "line")
       .attr("d", d => line(d.values))
+      .attr("stroke", (d, index) => color(index))
 
     city
       .append("text")
-      .datum(function(d) {
-        return { id: d.id, value: d.values[d.values.length - 1] };
-      })
-      .attr("transform", function(d) {
-        return (
-          "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"
-        );
-      })
+      .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
+      .attr("transform", d => `translate(${x(d.value.date)},${y(d.value.temperature)})`)
       .attr("x", 3)
       .attr("dy", "0.35em")
       .style("font", "8px sans-serif")
-      .text(function(d) {
-        return d.id;
-      });
+      .text(d => d.id);
 
     svg.selectAll(".domain").remove();
   };
