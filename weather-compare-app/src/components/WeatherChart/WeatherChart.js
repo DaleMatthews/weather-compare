@@ -50,7 +50,6 @@ class WeatherChart extends Component {
 
     // create color mapper
     const color = d3.scaleOrdinal()
-      .domain([0, 1, 2, 3])
       .range(d3.schemeDark2)
 
     svg
@@ -66,7 +65,7 @@ class WeatherChart extends Component {
     g.append("g")
       .attr("class", "axis axisX")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(4));
+      .call(d3.axisBottom(x).tickFormat(date => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][date]));
 
     g.append("g")
       .attr("class", "axis axisY")

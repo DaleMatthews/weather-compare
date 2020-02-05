@@ -4,7 +4,7 @@ import {
   REMOVE_CITY_SELECTION
 } from "../actionTypes";
 
-const initialState = ["BIRMINGHAM, AL"];
+const initialState = ["BIRMINGHAM, AL", "JACKSONVILLE, FL", "BOSTON, MA", "KANSAS CITY, MO"];
 
 const selectedCities = (state = initialState, action) => {
   switch (action.type) {
