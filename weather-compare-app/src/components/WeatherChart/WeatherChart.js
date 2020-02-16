@@ -9,7 +9,7 @@ class WeatherChart extends Component {
     const svg = d3.select("#weatherSvg svg");
     svg.selectAll("*").remove();
 
-    const cities = this.props.cities;
+    const cities = this.props.cities.slice(0, 4);
     if (cities.length === 0) {
       this.showEmpty();
       return;
@@ -27,12 +27,8 @@ class WeatherChart extends Component {
 
     const line = d3
       .line()
-      .x(function(d) {
-        return x(d.date);
-      })
-      .y(function(d) {
-        return y(d.temperature);
-      });
+      .x(d => x(d.date))
+      .y(d => y(d.temperature));
 
     // calculate min and max values
     let maxTemp = cities[0].values[0].temperature;
@@ -48,8 +44,12 @@ class WeatherChart extends Component {
     y.domain([minTemp, maxTemp]).nice();
 
     function make_y_gridlines() {
-      return d3.axisLeft(y).ticks(4);
+      return d3.axisLeft(y).ticks(6);
     }
+
+    // create color mapper
+    const color = d3.scaleOrdinal()
+      .range(d3.schemeDark2)
 
     svg
       .append("g")
@@ -64,11 +64,11 @@ class WeatherChart extends Component {
     g.append("g")
       .attr("class", "axis axisX")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(4));
+      .call(d3.axisBottom(x).tickFormat(date => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][date]));
 
     g.append("g")
       .attr("class", "axis axisY")
-      .call(d3.axisLeft(y).ticks(4));
+      .call(d3.axisLeft(y).ticks(6));
     var city = g
       .selectAll(".city")
       .data(cities)
@@ -78,31 +78,18 @@ class WeatherChart extends Component {
 
     city
       .append("path")
-      .attr("class", function(d) {
-        return "line " + d.id;
-      })
-      .attr("d", function(d) {
-        return line(d.values);
-      })
-      .attr("stroke-width", 2)
-      .attr("stroke", "black");
+      .attr("class", "line")
+      .attr("d", d => line(d.values))
+      .attr("stroke", (d, index) => color(index))
 
     city
       .append("text")
-      .datum(function(d) {
-        return { id: d.id, value: d.values[d.values.length - 1] };
-      })
-      .attr("transform", function(d) {
-        return (
-          "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"
-        );
-      })
+      .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
+      .attr("transform", d => `translate(${x(d.value.date)},${y(d.value.temperature)})`)
       .attr("x", 3)
       .attr("dy", "0.35em")
-      .style("font", "10px sans-serif")
-      .text(function(d) {
-        return d.id;
-      });
+      .style("font", "8px sans-serif")
+      .text(d => d.id);
 
     svg.selectAll(".domain").remove();
   };
@@ -124,7 +111,7 @@ class WeatherChart extends Component {
       <svg
         id="weatherSvg"
         viewBox="0 0 500 500"
-        preserveAspectRatio="xMinYMin slice"
+        preserveAspectRatio="xMidYMid meet"
         width="100%"
         height="100%"
       >

@@ -1,15 +1,18 @@
 #weatherSvg {
   width: 100%;
   max-width: 500px;
-  overflow: hidden;
   display: block;
   margin: 0 auto;
   flex-basis: 550px;
 }
 
+#weatherSvg, #weatherSvg svg {
+  overflow: visible;
+}
+
 .line {
   fill: none;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
 }
 
 .gridY {
