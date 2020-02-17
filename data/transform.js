@@ -16,7 +16,9 @@ const files = [
     { title: 'Normal Hottest', fileName: 'nrmmax.csv', units: '°F' },
     { title: 'Normal Coldest', fileName: 'nrmmin.csv', units: '°F' },
     { title: 'Normal Precipitation', fileName: 'nrmpcp.csv', units: 'Inches' },
-    { title: 'Normal Snowfall', fileName: 'nrmsnw.csv', units: 'Inches' },
+    // Don't need both average snowfall and normal snowfall
+    // Plus it seems later versions of the data don't even contain the normal snowfall
+    // { title: 'Normal Snowfall', fileName: 'nrmsnw.csv', units: 'Inches' },
     { title: 'Max Possible Sunshine', fileName: 'pctpos15.csv', units: '%' },
     { title: '# Days > 0.01" of Rain', fileName: 'prge0115.csv', units: 'Days' },
     { title: 'Relative Humidity', fileName: 'relhum15.csv', units: '%' },
