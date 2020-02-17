@@ -42,7 +42,13 @@ files.forEach(file => {
     records.forEach(record => {
         const cityAndState = `${record[0]}, ${record[1]}`;
         if (!results[cityAndState]) results[cityAndState] = {};
-        results[cityAndState][file.title] = record.slice(2);
+
+        if (file.title === 'Normal Heating Degree Days') {
+          // this dataset goes from jul-jun so fix it to jan-dec like every other dataset instead
+          results[cityAndState][file.title] = [record[8], record[9], record[10], record[11], record[12], record[13], record[2], record[3], record[4], record[5], record[6], record[7], /*annual*/ record[14]];
+        } else {
+          results[cityAndState][file.title] = record.slice(2);
+        }
     });
 });
 
