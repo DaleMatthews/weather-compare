@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import WeatherData from "../../data/weather-data.json";
 import { setDatasetSelection } from "../../redux/actions";
+import { getSelectedDatasetWithDescription } from "../../redux/selectors";
 import "./DataSelection.css";
+import selectedDataset from "../../redux/reducers/selectedDataset.js";
 
-
-const DataSelection = ({ selectedDataset, setDatasetSelection }) => {
+const DataSelection = ({ selectedDatasetWithDescription, setDatasetSelection }) => {
   const cities = Object.keys(WeatherData);
 
-  const createClassName = dataset => (dataset === selectedDataset ? 'dataset dataset--selected' : 'dataset');
+  const createClassName = dataset => (dataset === selectedDatasetWithDescription.name ? "dataset dataset--selected" : "dataset");
 
   const datasets = Object.keys(WeatherData[cities[0]])
     .map(dataset =>
@@ -22,10 +23,21 @@ const DataSelection = ({ selectedDataset, setDatasetSelection }) => {
       <div className="data-selection">
         {datasets}
       </div>
+      <div className="data-description">
+        <span>{selectedDatasetWithDescription.description}.</span>
+        <span>Read more about the data <a href="https://www.ncdc.noaa.gov/ghcn/comparative-climatic-data">here</a>.</span>
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ selectedDataset }) => ({ selectedDataset });
+const mapStateToProps = state => {
+  const { selectedDataset } = state;
+  const selectedDatasetWithDescription = getSelectedDatasetWithDescription(
+    state,
+    selectedDataset
+  );
+  return { selectedDatasetWithDescription };
+};
 
 export default connect(mapStateToProps, { setDatasetSelection })(DataSelection);

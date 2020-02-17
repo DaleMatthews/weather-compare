@@ -1,3 +1,4 @@
+import DatasetDescriptions from "../data/datasetDescriptions";
 import WeatherData from "../data/weather-data.json";
 
 export const getSelectedCityData = (store, selectedCities, selectedDataset) => {
@@ -13,3 +14,8 @@ export const getSelectedCityData = (store, selectedCities, selectedDataset) => {
     };
   });
 };
+
+export const getSelectedDatasetWithDescription = (store, selectedDataset) => ({
+  name: selectedDataset,
+  description: DatasetDescriptions[selectedDataset],
+});

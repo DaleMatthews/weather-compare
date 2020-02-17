@@ -7,7 +7,7 @@
   flex-flow: row nowrap;
   overflow-x: scroll;
   /* firefox */
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 /* safari */
 .data-selection::-webkit-scrollbar {
@@ -23,9 +23,25 @@
   border-radius: 500px;
   color: black;
   font-weight: bold;
+  outline: none;
 }
 
 .dataset--selected {
   color: white;
   background-color: darkslateblue;
+}
+
+.data-description {
+  margin-top: 8px;
+  min-height: 60px;
+  padding: 16px 0;
+  background-color: rgb(204, 204, 204);
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.data-description span {
+  flex: 1 0 auto;
 }
