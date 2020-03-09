@@ -1,0 +1,45 @@
+.city-selection-overlay {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+}
+
+.city-selection-dialog {
+  position: relative;
+  height: 80vh;
+  width: 280px;
+  top: 7.5vh;
+  padding: 16px 0 0 0;
+  background-color: white;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.city-selection-dialog input {
+  margin: 0 8px;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.city-selection-dialog ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  list-style-type: none;
+}
+
+.city-selection-dialog li {
+  cursor: pointer;
+  padding: 4px;
+}
+.city-selection-dialog li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}

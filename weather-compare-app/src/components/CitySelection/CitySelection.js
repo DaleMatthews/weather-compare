@@ -3,24 +3,42 @@ import { connect } from "react-redux";
 import WeatherData from "../../data/weather-data.json";
 import { addCitySelection, setCitySelection } from "../../redux/actions";
 import { getSelectedCityData } from "../../redux/selectors";
+import "./CitySelection.css";
+
+const cities = Object.keys(WeatherData);
 
 class CitySelection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { filteredCities: cities };
+  }
+
+  componentDidMount() {
+    this.filterInput.focus();
+  }
+
   handleSelect(e) {
-    this.props.setCitySelection(
-      [...e.target.options].filter(o => o.selected).map(o => o.value)
-    );
+    this.props.addCitySelection(e.target.innerText);
+  }
+
+  filter(e) {
+    this.setState({
+      filteredCities: cities.filter(c => c.toLowerCase().includes(e.target.value.toLowerCase())),
+    });
   }
 
   render() {
-    const cities = Object.keys(WeatherData);
-    const cityOptions = cities
+    const cityOptions = this.state.filteredCities
       .filter(o => !this.props.currentCities.some(city => city.id === o))
-      .map(city => <option key={city}>{city}</option>);
+      .map(city => <li key={city} onClick={e => this.handleSelect(e)}>{city}</li>);
     return (
-      <div>
-        <select multiple onChange={e => this.handleSelect(e)}>
-          {cityOptions}
-        </select>
+      <div class="city-selection-overlay">
+        <div class="city-selection-dialog">
+          <input ref={(input) => { this.filterInput = input; }} placeholder="Filter" onChange={e => this.filter(e)}/>
+          <ul>
+            {cityOptions}
+          </ul>
+        </div>
       </div>
     );
   }
