@@ -4,3 +4,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.spacer {
+  flex: 1 0 auto;
+}
