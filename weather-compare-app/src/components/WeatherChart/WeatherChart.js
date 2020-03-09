@@ -27,6 +27,7 @@ class WeatherChart extends Component {
 
     const line = d3
       .line()
+      .defined(d => typeof d.temperature === 'number')
       .x(d => x(d.date))
       .y(d => y(d.temperature));
 
