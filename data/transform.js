@@ -40,7 +40,14 @@ files.forEach(file => {
         cast: parseDataPoint,
     });
     records.forEach(record => {
-        const cityAndState = `${record[0]}, ${record[1]}`;
+        // convert cities from upper case to capital case
+        const city = record[0]
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+
+        const cityAndState = `${city}, ${record[1]}`;
+        console.log(cityAndState);
         if (!results[cityAndState]) results[cityAndState] = {};
 
         if (file.title === 'Normal Heating Degree Days') {
