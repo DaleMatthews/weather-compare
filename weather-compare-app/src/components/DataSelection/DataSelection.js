@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import WeatherData from "../../data/weather-data.json";
+import WeatherData from '../../data/weather-data.json';
 import { setDatasetSelection } from "../../redux/actions";
 import { getSelectedDatasetWithDescription } from "../../redux/selectors";
 import "./DataSelection.css";
-import selectedDataset from "../../redux/reducers/selectedDataset.js";
 
 const DataSelection = ({ selectedDatasetWithDescription, setDatasetSelection }) => {
   const cities = Object.keys(WeatherData);
