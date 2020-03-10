@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import CitySelection from "./components/CitySelection/CitySelection";
 import DisplayCities from "./components/DisplayCities/DisplayCities";
 import DataSelection from "./components/DataSelection/DataSelection";
 import Footer from "./components/Footer/Footer";
@@ -10,7 +9,6 @@ class App extends Component {
   render() {
     return (
       <div id="app">
-        <CitySelection />
         <DisplayCities />
         <WeatherChart />
         <DataSelection />

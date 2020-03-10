@@ -4,7 +4,7 @@ import {
   REMOVE_CITY_SELECTION
 } from "../actionTypes";
 
-const initialState = ["Birmingham, AL", "Jacksonville, FL", "Boston, MA", "Kansas City, MO"];
+const initialState = [/*"Birmingham, AL", "Jacksonville, FL", "Boston, MA", */"Kansas City, MO"];
 
 const selectedCities = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const selectedCities = (state = initialState, action) => {
       return action.payload.cities;
     }
     case REMOVE_CITY_SELECTION: {
-      return state.filter((city, index) => index !== action.payload.index);
+      return state.filter(city => city !== action.payload.city);
     }
     case ADD_CITY_SELECTION: {
       return state.concat([action.payload.city]);

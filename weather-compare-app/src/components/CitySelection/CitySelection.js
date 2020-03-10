@@ -19,6 +19,7 @@ class CitySelection extends Component {
 
   handleSelect(e) {
     this.props.addCitySelection(e.target.innerText);
+    this.props.hideDialog();
   }
 
   filter(e) {
@@ -32,8 +33,8 @@ class CitySelection extends Component {
       .filter(o => !this.props.currentCities.some(city => city.id === o))
       .map(city => <li key={city} onClick={e => this.handleSelect(e)}>{city}</li>);
     return (
-      <div class="city-selection-overlay">
-        <div class="city-selection-dialog">
+      <div className="city-selection-overlay">
+        <div className="city-selection-dialog">
           <input ref={(input) => { this.filterInput = input; }} placeholder="Filter" onChange={e => this.filter(e)}/>
           <ul>
             {cityOptions}
