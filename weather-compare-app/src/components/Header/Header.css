@@ -1,0 +1,11 @@
+header {
+  width: 100%;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  padding: 8px;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
