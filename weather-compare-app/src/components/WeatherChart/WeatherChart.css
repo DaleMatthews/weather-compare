@@ -2,8 +2,7 @@
   width: 100%;
   max-width: 500px;
   display: block;
-  margin: 0 auto;
-  flex-basis: 550px;
+  padding: 0 0 16px 0;
 }
 
 #weatherSvg, #weatherSvg svg {

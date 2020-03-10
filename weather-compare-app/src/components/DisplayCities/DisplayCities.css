@@ -1,0 +1,31 @@
+.display-cities {
+  align-self: flex-start;
+  font-size: 1.5rem;
+  padding: 8px 8px 0 8px;
+}
+
+.display-cities i.far {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+.selected-city, .add-city {
+  cursor: pointer;
+}
+
+.selected-city {
+  padding: 4px 0;
+}
+
+.selected-city--0 {
+  color: #1b9e77;
+}
+.selected-city--1 {
+  color: #d95f02;
+}
+.selected-city--2 {
+  color: #7570b3;
+}
+.selected-city--3 {
+  color: #e7298a;
+}

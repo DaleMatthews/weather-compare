@@ -83,14 +83,14 @@ class WeatherChart extends Component {
       .attr("d", d => line(d.values))
       .attr("stroke", (d, index) => color(index))
 
-    city
-      .append("text")
-      .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
-      .attr("transform", d => `translate(${x(d.value.date)},${y(d.value.temperature)})`)
-      .attr("x", 3)
-      .attr("dy", "0.35em")
-      .style("font", "8px sans-serif")
-      .text(d => d.id);
+    // city
+    //   .append("text")
+    //   .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
+    //   .attr("transform", d => `translate(${x(d.value.date)},${y(d.value.temperature)})`)
+    //   .attr("x", 3)
+    //   .attr("dy", "0.35em")
+    //   .style("font", "8px sans-serif")
+    //   .text(d => d.id);
 
     svg.selectAll(".domain").remove();
   };

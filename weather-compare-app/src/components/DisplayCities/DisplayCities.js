@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CitySelection from "../CitySelection/CitySelection";
 import { removeCitySelection } from "../../redux/actions";
+import "./DisplayCities.css";
 
 class DisplayCities extends Component {
   constructor(props) {
@@ -20,15 +21,15 @@ class DisplayCities extends Component {
 
   render() {
     const selectedCities = this.props.selectedCities.map((city, i) => (
-      <div className={`selected-city selected-city--${i}`}>
-        <button onClick={() => this.props.removeCitySelection(city)}>-</button>
+      <div className={`selected-city selected-city--${i}`} onClick={() => this.props.removeCitySelection(city)}>
+        <i className="far fa-minus-square"></i>
         <span>{city}</span>
       </div>
     ));
 
     const addButton =
-      <div className="add-city">
-        <button onClick={() => this.setState({ showDialog: !this.state.showDialog })}>+</button>
+      <div className="add-city" onClick={() => this.setState({ showDialog: !this.state.showDialog })}>
+        <i className="far fa-plus-square"></i>
         <span>Add City</span>
       </div>;
 
