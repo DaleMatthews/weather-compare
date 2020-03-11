@@ -22,6 +22,10 @@ class CitySelection extends Component {
     this.props.hideDialog();
   }
 
+  onClickOverlay(e) {
+    if (e.target.className === 'city-selection-overlay') this.props.hideDialog();
+  }
+
   filter(e) {
     this.setState({
       filteredCities: cities.filter(c => c.toLowerCase().includes(e.target.value.toLowerCase())),
@@ -33,7 +37,7 @@ class CitySelection extends Component {
       .filter(o => !this.props.currentCities.some(city => city.id === o))
       .map(city => <li key={city} onClick={e => this.handleSelect(e)}>{city}</li>);
     return (
-      <div className="city-selection-overlay">
+      <div className="city-selection-overlay" onClick={e => this.onClickOverlay(e)}>
         <div className="city-selection-dialog">
           <input ref={(input) => { this.filterInput = input; }} placeholder="Filter" onChange={e => this.filter(e)}/>
           <ul>

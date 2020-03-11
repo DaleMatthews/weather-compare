@@ -17,7 +17,7 @@
   top: 7.5vh;
   padding: 16px 0 0 0;
   background-color: white;
-  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.5),0 4px 20px 0 rgba(0,0,0,0.5);
   display: flex;
   flex-flow: column nowrap;
 }
