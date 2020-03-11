@@ -15,7 +15,7 @@ class WeatherChart extends Component {
       return;
     }
 
-    const margin = { top: 20, right: 80, bottom: 30, left: 50 };
+    const margin = { top: 20, right: 40, bottom: 30, left: 40 };
     const width = svg.attr("width") - margin.left - margin.right;
     const height = svg.attr("height") - margin.top - margin.bottom;
     const g = svg
@@ -65,11 +65,14 @@ class WeatherChart extends Component {
     g.append("g")
       .attr("class", "axis axisX")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickFormat(date => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][date]));
+      .call(d3.axisBottom(x).tickFormat(date => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][date]))
+      .style("font-size", "1rem");
 
     g.append("g")
       .attr("class", "axis axisY")
-      .call(d3.axisLeft(y).ticks(6));
+      .call(d3.axisLeft(y).ticks(6))
+      .style("font-size", "1rem");
+
     var city = g
       .selectAll(".city")
       .data(cities)
@@ -83,6 +86,7 @@ class WeatherChart extends Component {
       .attr("d", d => line(d.values))
       .attr("stroke", (d, index) => color(index))
 
+    // don't have labels
     // city
     //   .append("text")
     //   .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
@@ -113,8 +117,6 @@ class WeatherChart extends Component {
         id="weatherSvg"
         viewBox="0 0 500 500"
         preserveAspectRatio="xMidYMid meet"
-        width="100%"
-        height="100%"
       >
         <svg width="500" height="500"></svg>
       </svg>

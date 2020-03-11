@@ -1,5 +1,5 @@
 header {
-  width: 100%;
+  align-self: stretch;
   background-color: rgb(40, 40, 40);
   color: white;
   padding: 8px;

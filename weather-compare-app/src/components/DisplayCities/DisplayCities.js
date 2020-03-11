@@ -21,7 +21,7 @@ class DisplayCities extends Component {
 
   render() {
     const selectedCities = this.props.selectedCities.map((city, i) => (
-      <div className={`selected-city selected-city--${i}`} onClick={() => this.props.removeCitySelection(city)}>
+      <div key={i} className={`selected-city selected-city--${i}`} onClick={() => this.props.removeCitySelection(city)}>
         <i className="far fa-minus-square"></i>
         <span>{city}</span>
       </div>

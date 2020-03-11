@@ -11,9 +11,10 @@ footer > div {
   justify-content: center;
 }
 
-footer img {
-  width: 40px;
+footer i {
+  color: white;
 }
 footer a {
   display: flex;
+  text-decoration: none;
 }
