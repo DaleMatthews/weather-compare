@@ -15,7 +15,7 @@ class WeatherChart extends Component {
       return;
     }
 
-    const margin = { top: 20, right: 40, bottom: 30, left: 40 };
+    const margin = { top: 30, right: 50, bottom: 30, left: 50 };
     const width = svg.attr("width") - margin.left - margin.right;
     const height = svg.attr("height") - margin.top - margin.bottom;
     const g = svg

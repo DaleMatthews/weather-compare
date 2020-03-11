@@ -8,7 +8,7 @@ export default () => {
         <span>Copyright © { (new Date()).getFullYear() }</span>
         <div className="spacer"></div>
         <a href="https://github.com/dalematthews/weather-compare">
-          <i class="fab fa-2x fa-github"></i>
+          <i className="fab fa-2x fa-github"></i>
         </a>
       </div>
     </footer>
