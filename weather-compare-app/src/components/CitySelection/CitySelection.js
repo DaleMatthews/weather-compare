@@ -5,7 +5,13 @@ import { addCitySelection, setCitySelection } from "../../redux/actions";
 import { getSelectedCityData } from "../../redux/selectors";
 import "./CitySelection.css";
 
-const cities = Object.keys(WeatherData);
+const cities = Object.keys(WeatherData).sort((cityA, cityB) => {
+  // split to [city, state]
+  const a = cityA.split(',');
+  const b = cityB.split(',');
+  // if the state is the same, then compare city name, else compare state name
+  return a[1] === b[1] ? a[0] > b[0] : a[1] > b[1];
+});
 
 class CitySelection extends Component {
   constructor(props) {
