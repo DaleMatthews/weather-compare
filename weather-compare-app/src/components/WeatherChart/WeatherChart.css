@@ -14,7 +14,7 @@
   stroke-width: 1.5px;
 }
 
-.gridY {
+.gridY line {
   opacity: 0.25;
   stroke-dasharray: 5;
 }

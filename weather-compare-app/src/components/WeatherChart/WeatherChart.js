@@ -6,6 +6,7 @@ import "./WeatherChart.css";
 
 class WeatherChart extends Component {
   updateChart = () => {
+    console.log(this.props.selectedDataset);
     const svg = d3.select("#weatherSvg svg");
     svg.selectAll("*").remove();
 
@@ -57,7 +58,27 @@ class WeatherChart extends Component {
       .append("g")
       .attr("class", "grid gridY")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+      .call(
+        make_y_gridlines()
+          .tickSize(-width)
+          .tickFormat((d) => {
+            if (this.props.selectedDataset === "Normal Hottest") return d + "°";
+            if (this.props.selectedDataset === "Normal Coldest") return d + "°";
+            if (this.props.selectedDataset === "Normal Average") return d + "°";
+            if (this.props.selectedDataset === "Normal Precipitation")
+              return d + "in.";
+            if (this.props.selectedDataset === "Average Snowfall")
+              return d + "in.";
+            if (this.props.selectedDataset === "Relative Humidity")
+              return d + "%";
+            if (this.props.selectedDataset === "Average Wind")
+              return d + " mph";
+            if (this.props.selectedDataset === "# Days < 32°") return d + "°";
+            if (this.props.selectedDataset === "# Days < 32°") return d + "°";
+            return d;
+          })
+      )
+      .style("font-size", "0.75rem");
 
     g.append("g")
       .attr("class", "axis axisX")
@@ -85,10 +106,10 @@ class WeatherChart extends Component {
       )
       .style("font-size", "1rem");
 
-    g.append("g")
-      .attr("class", "axis axisY")
-      .call(d3.axisLeft(y).ticks(6))
-      .style("font-size", "1rem");
+    // g.append("g")
+    //   .attr("class", "axis axisY")
+    //   .call(d3.axisLeft(y).ticks(6))
+    //   .style("font-size", "1rem");
 
     var city = g
       .selectAll(".city")
