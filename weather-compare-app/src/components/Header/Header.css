@@ -1,11 +1,14 @@
-header {
-  align-self: stretch;
-  background-color: rgb(40, 40, 40);
-  color: white;
-  padding: 8px;
+header h1 {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0;
 }
 
-header h1 {
-  font-size: 2rem;
-  margin: 0;
+.emerson {
+  font-weight: 400;
+}
+
+a {
+  font-weight: 400;
 }

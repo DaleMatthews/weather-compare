@@ -27,15 +27,15 @@ class WeatherChart extends Component {
 
     const line = d3
       .line()
-      .defined(d => typeof d.temperature === 'number')
-      .x(d => x(d.date))
-      .y(d => y(d.temperature));
+      .defined((d) => typeof d.temperature === "number")
+      .x((d) => x(d.date))
+      .y((d) => y(d.temperature));
 
     // calculate min and max values
     let maxTemp = cities[0].values[0].temperature;
     let minTemp = maxTemp;
-    cities.forEach(city => {
-      city.values.forEach(value => {
+    cities.forEach((city) => {
+      city.values.forEach((value) => {
         if (value.temperature < minTemp) minTemp = value.temperature;
         if (value.temperature > maxTemp) maxTemp = value.temperature;
       });
@@ -49,23 +49,40 @@ class WeatherChart extends Component {
     }
 
     // create color mapper
-    const color = d3.scaleOrdinal()
-      .range(d3.schemeDark2)
+    const color = d3
+      .scaleOrdinal()
+      .range(["#000", "#663399", "#CD5C5C", "#d8bfd8"]);
 
     svg
       .append("g")
       .attr("class", "grid gridY")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(
-        make_y_gridlines()
-          .tickSize(-width)
-          .tickFormat("")
-      );
+      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
     g.append("g")
       .attr("class", "axis axisX")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickFormat(date => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][date]))
+      .call(
+        d3
+          .axisBottom(x)
+          .tickFormat(
+            (date) =>
+              [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ][date]
+          )
+      )
       .style("font-size", "1rem");
 
     g.append("g")
@@ -83,8 +100,8 @@ class WeatherChart extends Component {
     city
       .append("path")
       .attr("class", "line")
-      .attr("d", d => line(d.values))
-      .attr("stroke", (d, index) => color(index))
+      .attr("d", (d) => line(d.values))
+      .attr("stroke", (d, index) => color(index));
 
     // don't have labels
     // city
@@ -124,7 +141,7 @@ class WeatherChart extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { selectedCities, selectedDataset } = state;
   const cities = getSelectedCityData(state, selectedCities, selectedDataset);
   return { cities, selectedDataset };
