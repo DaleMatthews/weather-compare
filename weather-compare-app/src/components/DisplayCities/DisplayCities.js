@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import CitySelection from "../CitySelection/CitySelection";
 import { removeCitySelection } from "../../redux/actions";
 import "./DisplayCities.css";
@@ -21,23 +23,36 @@ class DisplayCities extends Component {
 
   render() {
     const selectedCities = this.props.selectedCities.map((city, i) => (
-      <div key={i} className={`selected-city selected-city--${i}`} onClick={() => this.props.removeCitySelection(city)}>
+      <div
+        key={i}
+        className={`selected-city selected-city--${i}`}
+        onClick={() => this.props.removeCitySelection(city)}
+      >
         <i className="far fa-minus-square"></i>
         <span>{city}</span>
       </div>
     ));
 
-    const addButton =
-      <div className="add-city" onClick={() => this.setState({ showDialog: !this.state.showDialog })}>
+    const addButton = (
+      <div
+        className="add-city"
+        onClick={() => this.setState({ showDialog: !this.state.showDialog })}
+      >
         <i className="far fa-plus-square"></i>
         <span>Add City</span>
-      </div>;
+      </div>
+    );
 
     return (
       <div className="display-cities">
+        <Header />
+        <p className="display-cities-header">Select Cities</p>
         {selectedCities}
         {this.props.selectedCities.length < 4 && addButton}
-        {this.state.showDialog && <CitySelection hideDialog={this.hideDialog}/>}
+        {this.state.showDialog && (
+          <CitySelection hideDialog={this.hideDialog} />
+        )}
+        <Footer />
       </div>
     );
   }
@@ -46,7 +61,7 @@ class DisplayCities extends Component {
 const mapStateToProps = ({ selectedCities }) => ({ selectedCities });
 
 const mapDispatchToProps = {
-  removeCitySelection
+  removeCitySelection,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayCities);

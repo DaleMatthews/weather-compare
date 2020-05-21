@@ -1,20 +1,24 @@
 #weatherSvg {
-  width: 100%;
-  max-width: 500px;
   display: block;
-  padding: 0 0 16px 0;
+  flex: 4;
+  width: 100%;
 }
 
-#weatherSvg, #weatherSvg svg {
+#weatherSvg,
+#weatherSvg svg {
   overflow: visible;
 }
 
 .line {
   fill: none;
-  stroke-width: 3px;
+  stroke-width: 1.5px;
 }
 
-.gridY {
-  stroke-dasharray: 5;
+.gridY line {
   opacity: 0.25;
+  stroke-dasharray: 5;
+}
+
+.axisY .tick line {
+  display: none;
 }

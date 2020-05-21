@@ -1,19 +1,27 @@
 footer {
+  bottom: 1rem;
+  box-sizing: border-box;
+  color: #333;
+  left: 0;
+  position: absolute;
   width: 100%;
-  background-color: rgb(40, 40, 40);
-  color: white;
+}
+
+@media (max-width: 1000px) {
+  footer {
+    bottom: 0;
+    position: relative;
+  }
 }
 
 footer > div {
-  padding: 8px;
-  display: flex;
   align-items: center;
+  box-sizing: border-box;
+  display: flex;
   justify-content: center;
+  padding: 8px;
 }
 
-footer i {
-  color: white;
-}
 footer a {
   display: flex;
   text-decoration: none;

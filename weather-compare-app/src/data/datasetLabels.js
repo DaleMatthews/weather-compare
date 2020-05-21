@@ -1,0 +1,18 @@
+export default {
+  "Average Snowfall": "in.",
+  Hottest: "°F",
+  Coldest: "°F",
+  "Max Wind": "mph",
+  "# Days < 32°": "",
+  "# Days > 90°": "",
+  "Normal Average": "°F",
+  "Normal Cooling Degree Days": "",
+  "Normal Heating Degree Days": "",
+  "Normal Hottest": "°F",
+  "Normal Coldest": "°F",
+  "Normal Precipitation": "in.",
+  "Max Possible Sunshine": "%",
+  '# Days > 0.01" of Rain': "",
+  "Relative Humidity": "%",
+  "Average Wind": "mph",
+};

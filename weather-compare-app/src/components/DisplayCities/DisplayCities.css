@@ -1,31 +1,63 @@
 .display-cities {
-  align-self: flex-start;
-  font-size: 1.5rem;
-  padding: 8px 8px 0 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  flex: 2;
+  height: 100vh;
+  margin: 0 2rem;
+  max-width: 300px;
+  padding: 1rem;
+  position: relative;
+}
+
+@media (max-width: 1030px) {
+  .display-cities {
+    display: block;
+    flex: 0 0 100%;
+    height: auto;
+    margin: 0.5rem;
+    max-width: none;
+  }
 }
 
 .display-cities i.far {
-  font-size: 1.2rem;
-  margin-right: 8px;
+  font-size: 1rem;
+  margin-right: 0 8px 0 0;
 }
 
-.selected-city, .add-city {
+.selected-city,
+.add-city {
   cursor: pointer;
 }
 
 .selected-city {
-  padding: 4px 0;
+  background: #fff;
+  color: #333;
+  font-weight: 400;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
 }
 
 .selected-city--0 {
-  color: #1b9e77;
+  background: #000;
+  color: #fff;
 }
 .selected-city--1 {
-  color: #d95f02;
+  background: #663399;
+  color: #fff;
 }
 .selected-city--2 {
-  color: #7570b3;
+  background: #cd5c5c;
+  color: #fff;
 }
 .selected-city--3 {
-  color: #e7298a;
+  background: #d8bfd8;
+  color: #000;
+}
+
+.display-cities-header {
+  border-bottom: 0.5px solid lightgray;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
 }
