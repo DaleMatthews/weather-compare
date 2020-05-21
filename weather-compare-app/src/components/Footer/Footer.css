@@ -7,7 +7,7 @@ footer {
   width: 100%;
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1000px) {
   footer {
     bottom: 0;
     position: relative;
