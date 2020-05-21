@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import * as d3 from "d3";
 import { connect } from "react-redux";
 import { getSelectedCityData } from "../../redux/selectors";
+import labels from "../../data/datasetLabels";
 import "./WeatherChart.css";
 
 class WeatherChart extends Component {
   updateChart = () => {
-    console.log(this.props.selectedDataset);
     const svg = d3.select("#weatherSvg svg");
     svg.selectAll("*").remove();
 
@@ -61,22 +61,7 @@ class WeatherChart extends Component {
       .call(
         make_y_gridlines()
           .tickSize(-width)
-          .tickFormat((d) => {
-            if (this.props.selectedDataset === "Normal Hottest") return d + "°";
-            if (this.props.selectedDataset === "Normal Coldest") return d + "°";
-            if (this.props.selectedDataset === "Normal Average") return d + "°";
-            if (this.props.selectedDataset === "Normal Precipitation")
-              return d + "in.";
-            if (this.props.selectedDataset === "Average Snowfall")
-              return d + "in.";
-            if (this.props.selectedDataset === "Relative Humidity")
-              return d + "%";
-            if (this.props.selectedDataset === "Average Wind")
-              return d + " mph";
-            if (this.props.selectedDataset === "# Days < 32°") return d + "°";
-            if (this.props.selectedDataset === "# Days < 32°") return d + "°";
-            return d;
-          })
+          .tickFormat((d) => d + labels[this.props.selectedDataset])
       )
       .style("font-size", "0.75rem");
 
@@ -106,11 +91,6 @@ class WeatherChart extends Component {
       )
       .style("font-size", "1rem");
 
-    // g.append("g")
-    //   .attr("class", "axis axisY")
-    //   .call(d3.axisLeft(y).ticks(6))
-    //   .style("font-size", "1rem");
-
     var city = g
       .selectAll(".city")
       .data(cities)
@@ -123,16 +103,6 @@ class WeatherChart extends Component {
       .attr("class", "line")
       .attr("d", (d) => line(d.values))
       .attr("stroke", (d, index) => color(index));
-
-    // don't have labels
-    // city
-    //   .append("text")
-    //   .datum(d => ({ id: d.id, value: d.values[d.values.length - 1] }))
-    //   .attr("transform", d => `translate(${x(d.value.date)},${y(d.value.temperature)})`)
-    //   .attr("x", 3)
-    //   .attr("dy", "0.35em")
-    //   .style("font", "8px sans-serif")
-    //   .text(d => d.id);
 
     svg.selectAll(".domain").remove();
   };
